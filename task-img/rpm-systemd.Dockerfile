@@ -10,14 +10,10 @@ RUN dnf install -y --allowerasing \
         sudo \
         systemd \
         git \
+        gcc \
         rpmdevtools \
-        curl
-
-RUN dnf install -y gcc && \
-    echo -e '#! /bin/bash gcc "$@"' > /usr/bin/musl-gcc && \
-    dnf clean all
-
-RUN echo -e '#! /bin/bash\ngcc "$@"' > /usr/bin/musl-gcc && \
+        curl && \
+    echo -e '#! /bin/bash\ngcc "$@"' > /usr/bin/musl-gcc && \
     chmod +x /usr/bin/musl-gcc
 
 RUN chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo && \
