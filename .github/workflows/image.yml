@@ -30,7 +30,7 @@ jobs:
       - name: Build and push (RPM)
         uses: docker/build-push-action@v7
         with:
-          context: systemd
+          context: .
           platforms: linux/arm64,linux/amd64
           file: task-img/rpm.Dockerfile
           push: true
@@ -39,7 +39,7 @@ jobs:
       - name: Build and push (RPM-Systemd)
         uses: docker/build-push-action@v7
         with:
-          context: systemd
+          context: .
           platforms: linux/arm64,linux/amd64
           file: task-img/rpm-systemd.Dockerfile
           push: true
@@ -48,7 +48,7 @@ jobs:
       - name: Build and push (DEB)
         uses: docker/build-push-action@v7
         with:
-          context: systemd
+          context: .
           platforms: linux/arm64,linux/amd64
           file: task-img/deb.Dockerfile
           push: true
@@ -57,7 +57,7 @@ jobs:
       - name: Build and push (DEB-Systemd)
         uses: docker/build-push-action@v7
         with:
-          context: systemd
+          context: .
           platforms: linux/arm64,linux/amd64
           file: task-img/deb-systemd.Dockerfile
           push: true
