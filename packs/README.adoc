@@ -1,0 +1,43 @@
+= Task packages
+
+> Fenrir ID: `packs-nib` +
+> Branch: `packs` +
+> Points: `85`
+
+== Task submission
+
+Put all the systemd unit files in the `packs` directory:
+
+[,text,subs="+macros"]
+----
+icon:folder[] ...
+├─ icon:folder[] systemd
+│  ├─ icon:folder[] crows
+│  │  ├─ icon:file-text[] build-deb.sh
+│  │  ├─ icon:file-text[] build-rpm.sh
+│  │  ├─ icon:file-archive[] raven.deb
+│  │  ├─ icon:lock[] raven.deb.asc
+│  │  ├─ icon:file-archive[] raven.rpm
+│  │  ├─ icon:lock[] raven.rpm.asc
+│  │  └─ icon:lock[] pubkey.gpg
+│  └─  icon:folder[] ghost
+│     ├─ icon:file-text[] build-deb.sh
+│     └─ icon:file-text[] build-rpm.sh
+└─ icon:folder[] .git
+----
+
+
+
+== Questions
+*
+
+== Copyright
+
+pass:[<i class="fab fa-creative-commons"></i>]
+pass:[<i class="fab fa-creative-commons-by"></i>]
+pass:[<i class="fab fa-creative-commons-nc"></i>]
+pass:[<i class="fab fa-creative-commons-sa"></i>]
+
+The project is licensed under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+(C) 2026-present *Iwan Kalinin* <mailto:koefic.cien@gmail.com[koefic.cien@gmail.com]>
