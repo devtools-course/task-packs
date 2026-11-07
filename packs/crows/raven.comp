@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+function _raven {
+    COMPREPLY=()
+
+    if [ "$COMP_CWORD" -eq 1 ]; then
+        COMPREPLY=($(compgen -W "-v --voice -f --fly -h --help" -- "${COMP_WORDS[COMP_CWORD]}"))
+        return
+    fi
+
+    case "${COMP_WORDS[COMP_CWORD-1]}" in
+        -v|--voice)
+            COMPREPLY=($(compgen -W "1 2 3" -- "${COMP_WORDS[COMP_CWORD]}"))
+		;;
+    esac
+}
+
+complete -F _raven raven

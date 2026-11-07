@@ -1,0 +1,13 @@
+[Unit]
+Description=Ghost
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ghost
+Restart=on-failure
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,25 @@
+#! /usr/bin/env bash
+
+source /etc/raven.conf || exit $?
+
+case "$1" in
+    -v|--voice)
+    	times=$2
+
+    	for (( i=0; i<times; ++i )); do
+        	echo "${msg}"
+        done
+    ;;
+    -f|--fly)
+        echo "${msg}" > /tmp/tomb
+    ;;
+    -h|--help)
+		cat <<- DOC
+			-v/--voice N => Shouts a phrase N times
+			-f/--fly     => Screams around tombs
+		DOC
+        ;;
+    *)
+    	echo "Unknown option: '$1'" >&2
+    ;;
+esac

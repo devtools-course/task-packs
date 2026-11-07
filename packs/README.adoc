@@ -6,12 +6,12 @@
 
 == Task submission
 
-Put all the systemd unit files in the `packs` directory:
+Put the solution in the `packs` directory:
 
 [,text,subs="+macros"]
 ----
 icon:folder[] ...
-├─ icon:folder[] systemd
+├─ icon:folder[] packs
 │  ├─ icon:folder[] crows
 │  │  ├─ icon:file-text[] build-deb.sh
 │  │  ├─ icon:file-text[] build-rpm.sh
@@ -26,10 +26,81 @@ icon:folder[] ...
 └─ icon:folder[] .git
 ----
 
+When naming your packages, follow these conventions:
 
+* `dpkg`: `<PACKAGE NAME>_<VERSION>_<ARCHITECTURE>.deb`
+* `rpm`: `<PACKAGE NAME>-<VERSION>.<ARCHITECTURE>.rpm`
+
+Each time you have to create both `deb` and `rpm` packages.
+To build the `deb` package, we run `build-deb.sh` script. To build the `rpm` package, we run `build-rpm.sh` script. The created packages must be placed next to the executed script.
+
+TIP: Try writing platform-independent scripts. Use `uname -m` to query the platform.
+
+CAUTION: The testing environment has a minimal setup: no additional package-building tools are provided!
+
+== Platform independent utility
+
+Total points: `45` +
+Subdirectory: `crows` +
+Package name: `raven` +
+Package version: `1.0.0`
+
+NOTE: Almost all parts are independent: you don't have to build the whole package to get non-zero score.
+
+=== Basic package (5+5 points)
+
+Create a package which provides the `raven` utility. Remember to include its config file, autocomplete and license.
+
+=== Man pages (10+5 points)
+
+Create a manpage for the utility and add it to the existing package.
+
+NOTE: You have to use `asciidoctor` to create the man page.
+
+TIP: Try running `raven --help`
+
+=== Alternatives (5+5 points)
+
+Utilities are not usually installed directly "as-it-is", instead they are managed by `alternatives`. Update the package so that the utility is managed by the `raven` alternative.
+
+=== Sign package (5+5 points)
+
+Since packages are installed using `sudo`, you must trust the authors. GPG is often used to validate the authenticity. Package managers usually sign the whole repo (its metadata) but we will sign the package directly. Build `raven.deb` (`raven.rpm`) locally and sign it using your own `gpg` key. As the result, you must create a detached signature `raven.deb.asc` (`raven.rpm.asc`). Export the signature's public key to the `pubkey.gpg` file.
+
+
+== Systemd service
+
+Total points: `40` +
+Subdirectory: `ghost` +
+Package name: `ghost`
+
+The package must provide the service, the library and the header.
+To build the library, run `./genlib.sh _VERSION_` (`_VERSION_` is either `1` or `2`). To build the server, run `./genserver.sh`.
+
+=== Base version (10+10 points)
+
+Create a package which provides the first version (`1.0.0`). To do this, firstly, build the library (version `1`) and than build the server itself.
+
+=== Update (10+10 points)
+
+Now you have to create a new version of the package so that it can be upgraded (`2.0.0`). This version must be built with the second version of the library (the server must be rebuilt too). Pay attention to systemd: the server must not be accessible during the update.
+
+This time, `build-_.sh` must produce both versions: e.g. `ghosh-1.0.0` and `ghost-2.0.0`.
 
 == Questions
-*
+* What might happen if you publish your private gpg key?
+* Why are `post-` and `pre-` `install`/`remove` hooks needed?
+* What is the difference between `rpm` and `deb` packages?
+* What is `mandb`?
+* Where to install these files:
+** binaries
+** libraries
+** headers
+** configs
+** systemd units
+** man pages
+** docs
+** autocomplete
 
 == Copyright
 
